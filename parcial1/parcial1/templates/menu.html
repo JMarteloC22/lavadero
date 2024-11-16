@@ -6,6 +6,12 @@
     <title>Navbar Example</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Ocultar la flecha del dropdown */
+        .dropdown-toggle::after {
+            display: none; /* Oculta la flecha */
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -17,14 +23,28 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 {% for opcion in opciones %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">{{ opcion }}</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown{{ loop.index }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ opcion }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown{{ loop.index }}">
+                        <a class="dropdown-item" href="\insertar\{{ opcion }}">Insertar</a>
+                        <a class="dropdown-item" href="\listar\{{ opcion }}">Listar</a>
+                        <a class="dropdown-item" href="\eliminar\{{ opcion }}">Eliminar</a>
+                        <a class="dropdown-item" href="\actualizar\{{ opcion }}">Actualizar</a>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
         </div>
     </nav>
-
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
