@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class vehiculo (models.Model):
-    marca = models.CharField(max_length=20)
+    marca = models.CharField(max_length=20, primary_key='True')
     v_ident = models.CharField(max_length=20)
     soat = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)

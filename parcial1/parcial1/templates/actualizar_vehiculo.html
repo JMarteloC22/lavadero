@@ -27,7 +27,7 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="v_ident">Identificación del Vehículo:</label>
-                <input type="text" name="v_ident" class="form-control" required>
+                <input type="text" name="v_ident" class="form-control" required placeholder="Identificación del vehículo">
             </div>
             <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
@@ -37,29 +37,53 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="marca">Marca:</label>
-                    {{ form.marca }}
+                    <select name="marca" class="form-control">
+                        <option value="{{ form.instance.marca }}" selected>{{ form.instance.marca }}</option>
+                        {% for value, display in form.fields.marca.choices %}
+                            <option value="{{ value }}">{{ display }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="soat">SOAT:</label>
-                    {{ form.soat }}
+                    <input type="text" name="soat" class="form-control" value="{{ form.instance.soat }}" placeholder="{{ form.instance.soat }}">
                 </div>
                 <div class="form-group">
                     <label for="tipo">Tipo:</label>
-                    {{ form.tipo }}
+                    <select name="tipo" class="form-control">
+                        <option value="{{ form.instance.tipo }}" selected>{{ form.instance.tipo }}</option>
+                        {% for value, display in form.fields.tipo.choices %}
+                            <option value="{{ value }}">{{ display }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="vias_frecuentes">Vías Frecuentes:</label>
-                    {{ form.vias_frecuentes }}
+                    <select name="vias_frecuentes" class="form-control">
+                        <option value="{{ form.instance.vias_frecuentes }}" selected>{{ form.instance.vias_frecuentes }}</option>
+                        {% for value, display in form.fields.vias_frecuentes.choices %}
+                            <option value="{{ value }}">{{ display }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="combustible">Combustible:</label>
-                    {{ form.combustible }}
+                    <select name="combustible" class="form-control">
+                        <option value="{{ form.instance.combustible }}" selected>{{ form.instance.combustible }}</option>
+                        {% for value, display in form.fields.combustible.choices %}
+                            <option value="{{ value }}">{{ display }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="transmision">Transmisión:</label>
-                    {{ form.transmision }}
+                    <select name="transmision" class="form-control">
+                        <option value="{{ form.instance.transmision }}" selected>{{ form.instance.transmision }}</option>
+                        {% for value, display in form.fields.transmision.choices %}
+                            <option value="{{ value }}">{{ display }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <input type="hidden" name="v_ident" value="{{ form.instance.v_ident }}">
                 <button type="submit" class="btn btn-success">Actualizar Vehículo</button>
             </form>
         {% endif %}
